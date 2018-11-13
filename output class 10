@@ -1,0 +1,458 @@
+Started by GitHub push by mish0020
+Obtained Jenkinsfile from git https://github.com/mish0020/infrastructure-pipeline.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] properties
+[Pipeline] node
+Running on ec7e503b1821 in /workspace/CR10-awspipeline
+[Pipeline] {
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/mish0020/infrastructure-pipeline.git # timeout=10
+Fetching upstream changes from https://github.com/mish0020/infrastructure-pipeline.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/mish0020/infrastructure-pipeline.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision cadd26b0aaa8059444a9f047810f9a1b08cc3e1e (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f cadd26b0aaa8059444a9f047810f9a1b08cc3e1e
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master cadd26b0aaa8059444a9f047810f9a1b08cc3e1e
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk 71fa789a41f1a4bfbd7ba9641588c76a2d8d19ac # timeout=10
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
+[CR10-awspipeline] Running shell script
++ env
+JENKINS_HOME=/var/jenkins_home
+RUN_CHANGES_DISPLAY_URL=http://unconfigured-jenkins-location/job/CR10-awspipeline/7/display/redirect?page=changes
+HOSTNAME=ec7e503b1821
+LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64
+NODE_LABELS=ec7e503b1821 linux swarm
+SHLVL=4
+HOME=/root
+HUDSON_COOKIE=7b8e61b1-caca-4f98-b09e-4be8180ca16b
+JENKINS_SERVER_COOKIE=durable-4956ef788f7a675fcb4414d06e266dc7
+COMMAND_OPTIONS=-master http://10.120.1.157:8080 -labels 'linux' -disableClientsUniqueId -executors 2 -username admin -password manopass
+WORKSPACE=/workspace/CR10-awspipeline
+NODE_NAME=ec7e503b1821
+STAGE_NAME=Test
+EXECUTOR_NUMBER=0
+BUILD_DISPLAY_NAME=#7
+HUDSON_HOME=/var/jenkins_home
+JOB_BASE_NAME=CR10-awspipeline
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+BUILD_ID=7
+DOCKER_CHANNEL=stable
+SWARM_CLIENT_VERSION=3.10
+BUILD_TAG=jenkins-CR10-awspipeline-7
+BUILD_NUMBER=7
+XFILESEARCHPATH=/usr/dt/app-defaults/%L/Dt
+JENKINS_NODE_COOKIE=d3b5dd1a-91ba-4f72-adb5-efeb182d3569
+RUN_DISPLAY_URL=http://unconfigured-jenkins-location/job/CR10-awspipeline/7/display/redirect
+DOCKER_VERSION=17.12.1-ce
+HUDSON_SERVER_COOKIE=77eb1dbeb091f608
+JOB_DISPLAY_URL=http://unconfigured-jenkins-location/job/CR10-awspipeline/display/redirect
+NLSPATH=/usr/dt/lib/nls/msg/%L/%N.cat
+JOB_NAME=CR10-awspipeline
+DOCKER_COMPOSE_VERSION=1.16.1
+PWD=/workspace/CR10-awspipeline
+PASSWORD_SECRET=/run/secrets/jenkins-pass
+USER_NAME_SECRET=/run/secrets/jenkins-user
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (GetInstances)
+[Pipeline] withCredentials
+[Pipeline] {
+[Pipeline] sh
+[CR10-awspipeline] Running shell script
++ aws ec2 describe-instances --region us-east-1
+{
+    "Reservations": [
+        {
+            "Instances": [
+                {
+                    "Monitoring": {
+                        "State": "disabled"
+                    }, 
+                    "PublicDnsName": "ec2-35-170-72-50.compute-1.amazonaws.com", 
+                    "State": {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+                    "EbsOptimized": false, 
+                    "LaunchTime": "2018-11-13T01:17:41.000Z", 
+                    "PublicIpAddress": "35.170.72.50", 
+                    "PrivateIpAddress": "10.120.1.157", 
+                    "ProductCodes": [], 
+                    "VpcId": "vpc-0790cdf70f20907f7", 
+                    "CpuOptions": {
+                        "CoreCount": 2, 
+                        "ThreadsPerCore": 1
+                    }, 
+                    "StateTransitionReason": "", 
+                    "InstanceId": "i-0c24fe8739414a438", 
+                    "EnaSupport": true, 
+                    "ImageId": "ami-0f830c70", 
+                    "PrivateDnsName": "ip-10-120-1-157.ec2.internal", 
+                    "KeyName": "mano665class", 
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "classroom10-JenkinsSecurityGroup-1M8GHMDTQSAWH", 
+                            "GroupId": "sg-0a0f6b6b87eed96e0"
+                        }
+                    ], 
+                    "ClientToken": "class-Jenki-1CCWAO42I3F8C", 
+                    "SubnetId": "subnet-0a34298cb545f6dab", 
+                    "InstanceType": "t2.medium", 
+                    "NetworkInterfaces": [
+                        {
+                            "Status": "in-use", 
+                            "MacAddress": "02:dd:e3:59:9e:ca", 
+                            "SourceDestCheck": true, 
+                            "VpcId": "vpc-0790cdf70f20907f7", 
+                            "Description": "", 
+                            "NetworkInterfaceId": "eni-0b72f839c28a5e196", 
+                            "PrivateIpAddresses": [
+                                {
+                                    "PrivateDnsName": "ip-10-120-1-157.ec2.internal", 
+                                    "PrivateIpAddress": "10.120.1.157", 
+                                    "Primary": true, 
+                                    "Association": {
+                                        "PublicIp": "35.170.72.50", 
+                                        "PublicDnsName": "ec2-35-170-72-50.compute-1.amazonaws.com", 
+                                        "IpOwnerId": "amazon"
+                                    }
+                                }
+                            ], 
+                            "PrivateDnsName": "ip-10-120-1-157.ec2.internal", 
+                            "Attachment": {
+                                "Status": "attached", 
+                                "DeviceIndex": 0, 
+                                "DeleteOnTermination": true, 
+                                "AttachmentId": "eni-attach-044721d2f8989086b", 
+                                "AttachTime": "2018-11-13T01:17:41.000Z"
+                            }, 
+                            "Groups": [
+                                {
+                                    "GroupName": "classroom10-JenkinsSecurityGroup-1M8GHMDTQSAWH", 
+                                    "GroupId": "sg-0a0f6b6b87eed96e0"
+                                }
+                            ], 
+                            "Ipv6Addresses": [], 
+                            "OwnerId": "955851341468", 
+                            "PrivateIpAddress": "10.120.1.157", 
+                            "SubnetId": "subnet-0a34298cb545f6dab", 
+                            "Association": {
+                                "PublicIp": "35.170.72.50", 
+                                "PublicDnsName": "ec2-35-170-72-50.compute-1.amazonaws.com", 
+                                "IpOwnerId": "amazon"
+                            }
+                        }
+                    ], 
+                    "SourceDestCheck": true, 
+                    "Placement": {
+                        "Tenancy": "default", 
+                        "GroupName": "", 
+                        "AvailabilityZone": "us-east-1a"
+                    }, 
+                    "Hypervisor": "xen", 
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1", 
+                            "Ebs": {
+                                "Status": "attached", 
+                                "DeleteOnTermination": true, 
+                                "VolumeId": "vol-09f63bacc573c0ebc", 
+                                "AttachTime": "2018-11-13T01:17:42.000Z"
+                            }
+                        }
+                    ], 
+                    "Architecture": "x86_64", 
+                    "RootDeviceType": "ebs", 
+                    "IamInstanceProfile": {
+                        "Id": "AIPAITGOATEYI4LMJBRRQ", 
+                        "Arn": "arn:aws:iam::955851341468:instance-profile/classroom10-JenkinsInstanceProfile-OOHYHL7B6JCE"
+                    }, 
+                    "RootDeviceName": "/dev/sda1", 
+                    "VirtualizationType": "hvm", 
+                    "Tags": [
+                        {
+                            "Value": "arn:aws:cloudformation:us-east-1:955851341468:stack/classroom10/94fd79f0-e6e1-11e8-8b8c-500c28604c82", 
+                            "Key": "aws:cloudformation:stack-id"
+                        }, 
+                        {
+                            "Value": "classroom10", 
+                            "Key": "aws:cloudformation:stack-name"
+                        }, 
+                        {
+                            "Value": "JenkinsServer", 
+                            "Key": "Name"
+                        }, 
+                        {
+                            "Value": "JenkinsServer", 
+                            "Key": "aws:cloudformation:logical-id"
+                        }
+                    ], 
+                    "AmiLaunchIndex": 0
+                }
+            ], 
+            "ReservationId": "r-032c9d86fd6e85bc7", 
+            "RequesterId": "043234062703", 
+            "Groups": [], 
+            "OwnerId": "955851341468"
+        }, 
+        {
+            "Instances": [
+                {
+                    "Monitoring": {
+                        "State": "enabled"
+                    }, 
+                    "PublicDnsName": "ec2-54-82-248-45.compute-1.amazonaws.com", 
+                    "State": {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+                    "EbsOptimized": false, 
+                    "LaunchTime": "2018-11-13T01:20:53.000Z", 
+                    "PublicIpAddress": "54.82.248.45", 
+                    "PrivateIpAddress": "10.120.1.7", 
+                    "ProductCodes": [], 
+                    "VpcId": "vpc-0790cdf70f20907f7", 
+                    "CpuOptions": {
+                        "CoreCount": 2, 
+                        "ThreadsPerCore": 1
+                    }, 
+                    "StateTransitionReason": "", 
+                    "InstanceId": "i-00d485d6dee9f5155", 
+                    "EnaSupport": true, 
+                    "ImageId": "ami-0f830c70", 
+                    "PrivateDnsName": "ip-10-120-1-7.ec2.internal", 
+                    "KeyName": "mano665class", 
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "classroom10-JenkinsSecurityGroup-1M8GHMDTQSAWH", 
+                            "GroupId": "sg-0a0f6b6b87eed96e0"
+                        }
+                    ], 
+                    "ClientToken": "0bb59c2a-a0a0-c958-7350-cfac3d6fe408_subnet-0a34298cb545f6dab_1", 
+                    "SubnetId": "subnet-0a34298cb545f6dab", 
+                    "InstanceType": "t2.medium", 
+                    "NetworkInterfaces": [
+                        {
+                            "Status": "in-use", 
+                            "MacAddress": "02:9f:9d:07:54:84", 
+                            "SourceDestCheck": true, 
+                            "VpcId": "vpc-0790cdf70f20907f7", 
+                            "Description": "", 
+                            "NetworkInterfaceId": "eni-0f0b3628dff3bb1b8", 
+                            "PrivateIpAddresses": [
+                                {
+                                    "PrivateDnsName": "ip-10-120-1-7.ec2.internal", 
+                                    "PrivateIpAddress": "10.120.1.7", 
+                                    "Primary": true, 
+                                    "Association": {
+                                        "PublicIp": "54.82.248.45", 
+                                        "PublicDnsName": "ec2-54-82-248-45.compute-1.amazonaws.com", 
+                                        "IpOwnerId": "amazon"
+                                    }
+                                }
+                            ], 
+                            "PrivateDnsName": "ip-10-120-1-7.ec2.internal", 
+                            "Attachment": {
+                                "Status": "attached", 
+                                "DeviceIndex": 0, 
+                                "DeleteOnTermination": true, 
+                                "AttachmentId": "eni-attach-0708a79b7bcfc270c", 
+                                "AttachTime": "2018-11-13T01:20:53.000Z"
+                            }, 
+                            "Groups": [
+                                {
+                                    "GroupName": "classroom10-JenkinsSecurityGroup-1M8GHMDTQSAWH", 
+                                    "GroupId": "sg-0a0f6b6b87eed96e0"
+                                }
+                            ], 
+                            "Ipv6Addresses": [], 
+                            "OwnerId": "955851341468", 
+                            "PrivateIpAddress": "10.120.1.7", 
+                            "SubnetId": "subnet-0a34298cb545f6dab", 
+                            "Association": {
+                                "PublicIp": "54.82.248.45", 
+                                "PublicDnsName": "ec2-54-82-248-45.compute-1.amazonaws.com", 
+                                "IpOwnerId": "amazon"
+                            }
+                        }
+                    ], 
+                    "SourceDestCheck": true, 
+                    "Placement": {
+                        "Tenancy": "default", 
+                        "GroupName": "", 
+                        "AvailabilityZone": "us-east-1a"
+                    }, 
+                    "Hypervisor": "xen", 
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1", 
+                            "Ebs": {
+                                "Status": "attached", 
+                                "DeleteOnTermination": true, 
+                                "VolumeId": "vol-00078695aef98233a", 
+                                "AttachTime": "2018-11-13T01:20:54.000Z"
+                            }
+                        }
+                    ], 
+                    "Architecture": "x86_64", 
+                    "RootDeviceType": "ebs", 
+                    "IamInstanceProfile": {
+                        "Id": "AIPAITGOATEYI4LMJBRRQ", 
+                        "Arn": "arn:aws:iam::955851341468:instance-profile/classroom10-JenkinsInstanceProfile-OOHYHL7B6JCE"
+                    }, 
+                    "RootDeviceName": "/dev/sda1", 
+                    "VirtualizationType": "hvm", 
+                    "Tags": [
+                        {
+                            "Value": "arn:aws:cloudformation:us-east-1:955851341468:stack/classroom10/94fd79f0-e6e1-11e8-8b8c-500c28604c82", 
+                            "Key": "aws:cloudformation:stack-id"
+                        }, 
+                        {
+                            "Value": "classroom10-JenkinsSlaveGroup-K9JS2XIFCBAV", 
+                            "Key": "aws:autoscaling:groupName"
+                        }, 
+                        {
+                            "Value": "jenkins slave", 
+                            "Key": "Name"
+                        }, 
+                        {
+                            "Value": "JenkinsSlaveGroup", 
+                            "Key": "aws:cloudformation:logical-id"
+                        }, 
+                        {
+                            "Value": "classroom10", 
+                            "Key": "aws:cloudformation:stack-name"
+                        }
+                    ], 
+                    "AmiLaunchIndex": 0
+                }
+            ], 
+            "ReservationId": "r-031b0a005931a7f8a", 
+            "RequesterId": "940372691376", 
+            "Groups": [], 
+            "OwnerId": "955851341468"
+        }
+    ]
+}
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CreateInstance)
+[Pipeline] withCredentials
+[Pipeline] {
+[Pipeline] sh
+[CR10-awspipeline] Running shell script
++ aws ec2 run-instances --image-id ami-013be31976ca2c322 --count 1 --instance-type t2.micro --key-name mano665class --security-group-ids sg-0cb733d8ddff94802 --subnet-id subnet-018844073869cc7ba --region us-east-1
+{
+    "Instances": [
+        {
+            "Monitoring": {
+                "State": "disabled"
+            }, 
+            "PublicDnsName": "", 
+            "StateReason": {
+                "Message": "pending", 
+                "Code": "pending"
+            }, 
+            "State": {
+                "Code": 0, 
+                "Name": "pending"
+            }, 
+            "EbsOptimized": false, 
+            "LaunchTime": "2018-11-13T02:46:49.000Z", 
+            "PrivateIpAddress": "172.31.12.57", 
+            "ProductCodes": [], 
+            "VpcId": "vpc-06f51d120668b9d6d", 
+            "CpuOptions": {
+                "CoreCount": 1, 
+                "ThreadsPerCore": 1
+            }, 
+            "StateTransitionReason": "", 
+            "InstanceId": "i-0a6ff1688ebc08615", 
+            "ImageId": "ami-013be31976ca2c322", 
+            "PrivateDnsName": "ip-172-31-12-57.ec2.internal", 
+            "KeyName": "mano665class", 
+            "SecurityGroups": [
+                {
+                    "GroupName": "default", 
+                    "GroupId": "sg-0cb733d8ddff94802"
+                }
+            ], 
+            "ClientToken": "", 
+            "SubnetId": "subnet-018844073869cc7ba", 
+            "InstanceType": "t2.micro", 
+            "NetworkInterfaces": [
+                {
+                    "Status": "in-use", 
+                    "MacAddress": "02:f2:9b:22:f7:16", 
+                    "SourceDestCheck": true, 
+                    "VpcId": "vpc-06f51d120668b9d6d", 
+                    "Description": "", 
+                    "NetworkInterfaceId": "eni-0ab9be237923e49b1", 
+                    "PrivateIpAddresses": [
+                        {
+                            "PrivateDnsName": "ip-172-31-12-57.ec2.internal", 
+                            "Primary": true, 
+                            "PrivateIpAddress": "172.31.12.57"
+                        }
+                    ], 
+                    "PrivateDnsName": "ip-172-31-12-57.ec2.internal", 
+                    "Attachment": {
+                        "Status": "attaching", 
+                        "DeviceIndex": 0, 
+                        "DeleteOnTermination": true, 
+                        "AttachmentId": "eni-attach-098460544ceb5c90d", 
+                        "AttachTime": "2018-11-13T02:46:49.000Z"
+                    }, 
+                    "Groups": [
+                        {
+                            "GroupName": "default", 
+                            "GroupId": "sg-0cb733d8ddff94802"
+                        }
+                    ], 
+                    "Ipv6Addresses": [], 
+                    "OwnerId": "955851341468", 
+                    "SubnetId": "subnet-018844073869cc7ba", 
+                    "PrivateIpAddress": "172.31.12.57"
+                }
+            ], 
+            "SourceDestCheck": true, 
+            "Placement": {
+                "Tenancy": "default", 
+                "GroupName": "", 
+                "AvailabilityZone": "us-east-1a"
+            }, 
+            "Hypervisor": "xen", 
+            "BlockDeviceMappings": [], 
+            "Architecture": "x86_64", 
+            "RootDeviceType": "ebs", 
+            "RootDeviceName": "/dev/xvda", 
+            "VirtualizationType": "hvm", 
+            "AmiLaunchIndex": 0
+        }
+    ], 
+    "ReservationId": "r-0d88cd0462a417d6f", 
+    "Groups": [], 
+    "OwnerId": "955851341468"
+}
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
