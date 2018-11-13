@@ -7,6 +7,10 @@ node('linux'){
 		sh "env"
 	}
 	stage("GetInstances"){
-		sh "aws ec2 describe-instance --region us-east-1"
-    }		
-}		
+		withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'b7bb5e0e-017e-45bf-b639-a2cde0d50dc5', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+		{
+ 			sh "aws ec2 describe-instance --region us-east-1"
+                }		
+
+	}		
+}
